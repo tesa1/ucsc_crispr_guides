@@ -5,7 +5,7 @@ that should work.
 
 Steps for designing guides:
   - Search UCSC database of all known guides 
-  - Filter for those that have that are unique
+  - Filter out guides which are not unique in the genome
   - Filter for those that have the best possibility of working
   
  ## Use of UCSC All predicted Super track ##
