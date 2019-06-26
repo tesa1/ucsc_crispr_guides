@@ -28,6 +28,7 @@ cd guides
 
 # add the filename to each file for future use
 perl -p -i -e 's/$/ $ARGV/;' *
+cat *.txt > ctcf_all_targets_ucsc_guides.txt
 ```
 
 This will create files for each region with the predicted UCSC guides and the filename for parsing.
