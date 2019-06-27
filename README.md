@@ -34,7 +34,12 @@ cat *.txt > ctcf_all_targets_ucsc_guides.txt
 This will create files for each region with the predicted UCSC guides and the filename for parsing.
 
 
-## Determining CTCF motifs in the human genome
+## Determining CTCF motifs in the human genome and identifying overlaps with CTCF sites of interest
+
+Steps for determining CTCF motifs in the human genome:
+  - Create a motif file from UCSC galaxy human CTCF pssm file
+  - Run scanMotifGenomeWide on hg19 with the custom motif file
+  - Intersect genomic regions of original CTCF sites of interest with CTCF motif genomic regions
 
  ```bash
 # set path so you can run Homer tools
@@ -44,5 +49,12 @@ scanMotifGenomeWide.pl /home/t.severson/tools/homer/motifs/consensus_CTCF_galaxy
 
 # intersect with original CTCF binding sites
 intersectBed -a ctcf_kmeans_co_h3k27ac_up_in_mets_tads_coverage_only.bed -b galaxy_ctcf_hg19.bed -wa -wb > ctcf_kmeans_co_h3k27ac_up_in_mets_tads_coverage_only_ctcf_galaxy_motifs.txt
+```
+
+## Combining the CTCF motif information with the guides designed in CTCF sites of interest
+
+```bash
+# get coverage of the regions of all CTCF motifs identified with the regions of the filtered CTCF guides
+coverageBed -a ctcf_kmeans_co_h3k27ac_up_in_mets_tads_coverage_only_ctcf_galaxy_motifs_all.bed -b guides/ctcf_ucsc_guides_filtered.bed > ctcf_kmeans_co_h3k27ac_up_in_mets_tads_coverage_only_ctcf_galaxy_motifs_all_guides_coverageBed.txt
 
 ```
