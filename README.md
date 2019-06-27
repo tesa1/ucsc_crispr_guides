@@ -7,7 +7,7 @@ Steps for designing guides:
   - Search UCSC database of all known guides 
   - Filter out guides which are not unique in the genome
   - Filter for those that have the best possibility of working
-  - Add CTCF motif information and select guide which is in CTCF site if possible
+  - Select guide which is in CTCF motif if possible
   
  ## Use of UCSC All predicted Super track ##
 Information can be found here: https://genome-test.gi.ucsc.edu/cgi-bin/hgTrackUi?db=hg19&c=chr2&g=crisprAll
