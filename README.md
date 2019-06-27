@@ -7,7 +7,7 @@ Steps for designing guides:
   - Search UCSC database of all known guides 
   - Filter out guides which are not unique in the genome
   - Filter for those that have the best possibility of working
-  - Select guide which is in CTCF motif if possible
+  - Select guides which are in CTCF motif if possible
   
  ## Use of UCSC All predicted Super track ##
 Information can be found here: https://genome-test.gi.ucsc.edu/cgi-bin/hgTrackUi?db=hg19&c=chr2&g=crisprAll
@@ -55,7 +55,7 @@ intersectBed -a ctcf_kmeans_co_h3k27ac_up_in_mets_tads_coverage_only.bed -b gala
 
 Steps for final guide selection:
   - Get coverage of motif regions with filtered guides
-  - Select the top 4 guides based on coverage of the CTCF motif (highest)
+  - When possible, select the top 4 guides based on coverage of the CTCF motif (highest)
 
 
 ```bash
