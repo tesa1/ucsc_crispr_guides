@@ -53,6 +53,11 @@ intersectBed -a ctcf_kmeans_co_h3k27ac_up_in_mets_tads_coverage_only.bed -b gala
 
 ## Combining the CTCF motif information with the guides designed in CTCF sites of interest
 
+Steps for final guide selection:
+  - Get coverage of motif regions with filtered guides
+  - Select the top 4 guides based on coverage of the CTCF motif (highest)
+
+
 ```bash
 # get coverage of the regions of all CTCF motifs identified with the regions of the filtered CTCF guides
 coverageBed -a ctcf_kmeans_co_h3k27ac_up_in_mets_tads_coverage_only_ctcf_galaxy_motifs_all.bed -b guides/ctcf_ucsc_guides_filtered.bed > ctcf_kmeans_co_h3k27ac_up_in_mets_tads_coverage_only_ctcf_galaxy_motifs_all_guides_coverageBed.txt
