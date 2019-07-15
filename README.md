@@ -15,7 +15,7 @@ and here:
 https://genome-euro.ucsc.edu/cgi-bin/hgTables
 
 It's not necessary but data can be downloaded from https://hgdownload-test.gi.ucsc.edu/goldenPath/hg19/database/crispr.bb
-And it can queried in the UCSC table browser under Genes and Gene Predictions -> CRISPR Targets (/gbdb/hg19/crisprAll/crispr.bb)
+And it can queried in the UCSC table browser under Genes and Gene Predictions -> CRISPR Targets (https://genome.ucsc.edu/cgi-bin/hgTables) file queried is:/gbdb/hg19/crisprAll/crispr.bb
 
 Data can be extracted with the kent command line tools (bigBedToBed), available:
    http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/
