@@ -10,7 +10,9 @@ Steps for designing guides:
   - Select guides which are in CTCF motif if possible
   
  ## Use of UCSC All predicted Super track ##
-Information can be found here: https://genome-test.gi.ucsc.edu/cgi-bin/hgTrackUi?db=hg19&c=chr2&g=crisprAll
+Information can be found here: https://genome-test.gi.ucsc.edu/cgi-bin/hgTrackUi?db=hg19&c=chr2&g=crisprAll 
+and here:
+https://genome-euro.ucsc.edu/cgi-bin/hgTables
 
 Data can be extracted with the kent command line tools (bigBedToBed), available:
    http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/
