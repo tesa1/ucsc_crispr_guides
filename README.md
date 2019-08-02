@@ -59,6 +59,8 @@ intersectBed -a ctcf_kmeans_co_h3k27ac_up_in_mets_tads_coverage_only.bed -b gala
 ## Combining the CTCF motif information with the guides designed in CTCF sites of interest
 
 Steps for final guide selection:
+  - Use a custom R script to make ouptut of UCSC file useful.
+  - Filter guides based on uniqueness in the genome and  mit_specificity_score > 70 & doench2016_percentile_only > 65 (custom R script to make
   - Get coverage of motif regions with filtered guides
   - When possible, select the top 4 guides based on coverage of the CTCF motif (highest)
 
