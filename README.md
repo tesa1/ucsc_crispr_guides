@@ -1,4 +1,4 @@
-# Designing guides for a CRISPR-Cas9 experiment to knockout CTCF sites
+# Designing guides for a CRISPR-Cas9 experiment to knockout CTCF sites (including control guides)
 
 This is a manual of how to use publically available tools to obtain previously identified guides and parse for those
 that should work.
@@ -8,6 +8,12 @@ Steps for designing guides:
   - Filter out guides which are not unique in the genome
   - Filter for those that have the best possibility of working
   - Select guides which are in CTCF motif if possible
+  
+Steps for designing control guides:
+  - Search UCSC database of all known guides 
+  - Filter out guides which are not unique in the genome
+  - Filter for those that have the best possibility of working
+
   
  ## Use of UCSC All predicted Super track ##
 Information can be found here: # link is dead https://genome-test.gi.ucsc.edu/cgi-bin/hgTrackUi?db=hg19&c=chr2&g=crisprAll 
@@ -20,12 +26,14 @@ And it can queried in the UCSC table browser under Genes and Gene Predictions ->
 Downloaded data can be extracted with the kent command line tools (bigBedToBed), available:
    http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/
    
-Using the bed file of 720 CTCF sites, create a shell script to extract the data. Then run the script to get the CRISPR All guides
-in the regions.
+Use the snakemake file to query the bed file of 720 CTCF sites and design a shell script to obtain guides in the target regions and the control regions (250-500bp upstream of target CTCF site)
 
 
  ```bash
- # get the guides
+snakemake -s make_tsv_and_shell_control.py 
+# note this snakemake requires two files 1) design_ucsc_guides_from_ctcf_sites_bed.R and 2) design_ucsc_control_guides_from_ucsc_sites_bed.R files
+```
+
 sh ctcf_sites_ucsc_guides.sh 
 mkdir guides
 cp *.txt guides
