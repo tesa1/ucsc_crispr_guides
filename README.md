@@ -30,15 +30,15 @@ Use the snakemake file to query the bed file of 720 CTCF sites and design a shel
 
 
  ```bash
-snakemake -s make_tsv_and_shell_control.py 
+snakemake -s make_tsv_and_shell_targets_controls.py 
 # note this snakemake requires two R scripts: 1) design_ucsc_target_guides_from_input_sites_bed.R and 
 # 2) design_ucsc_control_guides_from_input_sites_bed.R 
 ```
 
-## Obtain UCSC guides in target regions and and filter for uniqueness, specificity, effeciency, CTCF motif coverage 
+## Obtain UCSC guides in target regions and and filter for uniqueness, specificity, effeciency and motif coverage 
 
 ```bash
-snakemake -s design_target_guides_ctcf_motif_only4_filtered.py
+snakemake -s design_target_guides_homer_motif_only4_filtered.py
 # note this snakemake file requires two R scripts 1) filter_ucsc_target_guides.R and 
 # 2) filter_target_guides_with_motif_info.R
 
