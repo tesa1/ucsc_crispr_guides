@@ -35,6 +35,7 @@ to your own path.
 
 All shell scripts produced assume bigBedToBed is here:/home/t.severson/tools/kent_utils/bigBedToBed and the crispr.bb file is here: /home/t.severson/zwart/crispr_guides/ctcf_ucsc_guides/crispr.bb. You will have to change these locations in the Rscripts to your relevant locations in order to run the shell scripts.
 
+
 ## Query the bed file of target sites and design a shell script to obtain guides in the target regions and the control regions (250-500bp upstream of target site)
 
  ```bash
@@ -51,7 +52,7 @@ homer genomeWideMotifScan needs to be installed (eg. /home/t.severson/tools/home
 
 ```bash
 snakemake -s design_target_guides_homer_motif_only4_filtered.py
-# note this snakemake file requires two R scripts 1) filter_ucsc_target_guides.R, 2) make_homer_motif_info_bed.R and
+# note this snakemake file requires three R scripts 1) filter_ucsc_target_guides.R, 2) make_homer_motif_info_bed.R and
 # 3) filter_target_guides_with_motif_info.R.
 ```
 
@@ -60,6 +61,10 @@ After initial filtering, this script will identify the top 1 control guides per 
 
 ```bash
 snakemake -s design_control_guides_only1_filtered_get_missing.py
-# note this snakemake file requires one R scripts 1) filter_control_guides.R 
+# note this snakemake file requires one R script 1) filter_control_guides.R 
 ```
+
+The files with relevant CRISPR-Cas9 guide sequence information are (targets will have 4 guides and controls 1 per target): 
+  target_guides_filtered_homer_motif_coverage_info_only4_filtered_final_list_targets.csv
+  target_guides_filtered_homer_motif_coverage_info_only4_filtered_final_list_controls.csv
 
