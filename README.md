@@ -64,7 +64,7 @@ snakemake -s design_control_guides_only1_filtered_get_missing.py
 # note this snakemake file requires one R script 1) filter_control_guides.R 
 ```
 
-The two files with relevant CRISPR-Cas9 guide sequence information are (targets will have 4 guides and controls 1 per target): 
+The two files with relevant CRISPR-Cas9 guide sequence information are (targets will have 4 guides per region and controls 1 guide per region (matched with target)): 
    1) target_guides_filtered_homer_motif_coverage_info_only4_filtered_final_list_targets.csv
    2) target_guides_filtered_homer_motif_coverage_info_only4_filtered_final_list_controls.csv
 
