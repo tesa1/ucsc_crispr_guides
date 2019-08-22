@@ -1,4 +1,4 @@
-# Designing guides for a CRISPR-Cas9 experiment to knockout CTCF sites (including control guides)
+# Designing guides for a CRISPR-Cas9 experiment to knockout binding sites (including control guides)
 
 This is a manual of how to use publically available tools to obtain previously identified guides and parse for those
 that should work. The aim is to design 4 guides per region that are in a CTCF motif and have 1 control guide per region.
@@ -26,11 +26,16 @@ And it can queried in the UCSC table browser under Genes and Gene Predictions ->
 Downloaded data can be extracted with the kent command line tools (bigBedToBed), available:
    http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/
    
-## Use the snakemake file to query the bed file of target sites and design a shell script to obtain guides in the target regions and the control regions (250-500bp upstream of target site)
+
+## Note all commmands expect specific locations of files and path locations. 
 
 These files are dependent on a working directory path. For your own use, you will have to change lines in the python scripts like this:  "WDIR="/home/t.severson/zwart/crispr_guides/ctcf_ucsc_guides/pipeline/" and in the Rscripts like this: 
 "setwd("/home/t.severson/zwart/crispr_guides/ctcf_ucsc_guides/pipeline/")"
 to your own path.
+
+The shell scripts produced assume bigBedToBed is here:/home/t.severson/tools/kent_utils/bigBedToBed and the crispr.bb file is here: /home/t.severson/zwart/crispr_guides/ctcf_ucsc_guides/crispr.bb. You will have to change these locations in the Rscripts to your relevant locations in order to run the shell scripts.
+
+## Query the bed file of target sites and design a shell script to obtain guides in the target regions and the control regions (250-500bp upstream of target site)
 
  ```bash
 snakemake -s make_tsv_and_shell_targets_controls.py 
@@ -41,13 +46,13 @@ snakemake -s make_tsv_and_shell_targets_controls.py
 ## Obtain UCSC guides in target regions and and filter for uniqueness, specificity, effeciency and motif coverage 
 After initial filtering, this script will identify the top 4 guides per target region based on motif coverage percentage.
 
+homer needs to be installed (eg. /home/t.severson/tools/homer/) and a motif file is necessary with the path defined in design_target_guides_homer_motif_only4_filtered.py
 
 ```bash
 snakemake -s design_target_guides_homer_motif_only4_filtered.py
 # note this snakemake file requires two R scripts 1) filter_ucsc_target_guides.R, 2) make_homer_motif_info_bed.R and
-# 3) filter_target_guides_with_motif_info.R
+# 3) filter_target_guides_with_motif_info.R.
 ```
-
 
 ## Obtain UCSC guides in control regions for targets and filter for uniqueness, specificity and effeciency
 After initial filtering, this script will identify the top 1 control guides per target region based on motif coverage percentage.
