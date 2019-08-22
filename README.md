@@ -46,7 +46,8 @@ snakemake -s make_tsv_and_shell_targets_controls.py
 ## Obtain UCSC guides in target regions and and filter for uniqueness, specificity, effeciency and motif coverage 
 After initial filtering, this script will identify the top 4 guides per target region based on motif coverage percentage.
 
-homer needs to be installed (eg. /home/t.severson/tools/homer/) and a motif file is necessary with the path defined in design_target_guides_homer_motif_only4_filtered.py
+homer genomeWideMotifScan needs to be installed (eg. /home/t.severson/tools/homer/) and a motif file is necessary with the motif path and motif file defined at the top of design_target_guides_homer_motif_only4_filtered.py and line 48.
+(http://homer.ucsd.edu/homer/motif/genomeWideMotifScan.html)
 
 ```bash
 snakemake -s design_target_guides_homer_motif_only4_filtered.py
@@ -54,12 +55,11 @@ snakemake -s design_target_guides_homer_motif_only4_filtered.py
 # 3) filter_target_guides_with_motif_info.R.
 ```
 
-## Obtain UCSC guides in control regions for targets and filter for uniqueness, specificity and effeciency
-After initial filtering, this script will identify the top 1 control guides per target region based on motif coverage percentage.
-
+## Obtain UCSC guides in control regions for targets and filter for uniqueness, specificity and effeciency. Also determine regions that do not have target or control guides and design new shell scripts
+After initial filtering, this script will identify the top 1 control guides per target region based on Doench2016 percentile.
 
 ```bash
-snakemake -s design_target_guides_homer_motif_only4_filtered.py
+snakemake -s design_control_guides_only1_filtered_get_missing.py
 # note this snakemake file requires two R scripts 1) filter_ucsc_target_guides.R and 
 # 2) filter_target_guides_with_motif_info.R
 
