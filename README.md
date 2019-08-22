@@ -33,7 +33,7 @@ These files are dependent on a working directory path. For your own use, you wil
 "setwd("/home/t.severson/zwart/crispr_guides/ctcf_ucsc_guides/pipeline/")"
 to your own path.
 
-The shell scripts produced assume bigBedToBed is here:/home/t.severson/tools/kent_utils/bigBedToBed and the crispr.bb file is here: /home/t.severson/zwart/crispr_guides/ctcf_ucsc_guides/crispr.bb. You will have to change these locations in the Rscripts to your relevant locations in order to run the shell scripts.
+All shell scripts produced assume bigBedToBed is here:/home/t.severson/tools/kent_utils/bigBedToBed and the crispr.bb file is here: /home/t.severson/zwart/crispr_guides/ctcf_ucsc_guides/crispr.bb. You will have to change these locations in the Rscripts to your relevant locations in order to run the shell scripts.
 
 ## Query the bed file of target sites and design a shell script to obtain guides in the target regions and the control regions (250-500bp upstream of target site)
 
@@ -46,7 +46,7 @@ snakemake -s make_tsv_and_shell_targets_controls.py
 ## Obtain UCSC guides in target regions and and filter for uniqueness, specificity, effeciency and motif coverage 
 After initial filtering, this script will identify the top 4 guides per target region based on motif coverage percentage.
 
-homer genomeWideMotifScan needs to be installed (eg. /home/t.severson/tools/homer/) and a motif file is necessary with the motif path and motif file defined at the top of design_target_guides_homer_motif_only4_filtered.py and line 48.
+homer genomeWideMotifScan needs to be installed (eg. /home/t.severson/tools/homer/) and a motif file is necessary with the motif path and motif file defined at the top of design_target_guides_homer_motif_only4_filtered.py. Homer home needs to be defined on line 48 of design_target_guides_homer_motif_only4_filtered.py
 (http://homer.ucsd.edu/homer/motif/genomeWideMotifScan.html)
 
 ```bash
@@ -55,56 +55,11 @@ snakemake -s design_target_guides_homer_motif_only4_filtered.py
 # 3) filter_target_guides_with_motif_info.R.
 ```
 
-## Obtain UCSC guides in control regions for targets and filter for uniqueness, specificity and effeciency. Also determine regions that do not have target or control guides and design new shell scripts
-After initial filtering, this script will identify the top 1 control guides per target region based on Doench2016 percentile.
+## Obtain UCSC guides in control regions for targets and filter for uniqueness, specificity and effeciency. Also determine regions that do not yet have target or control guides and design new shell scripts (for new controls, the region is moved 250bp upstream from original)
+After initial filtering, this script will identify the top 1 control guides per target region based on Doench2016 percentile. Provide relevant details for crispr.bb and bigBedToBed.
 
 ```bash
 snakemake -s design_control_guides_only1_filtered_get_missing.py
-# note this snakemake file requires two R scripts 1) filter_ucsc_target_guides.R and 
-# 2) filter_target_guides_with_motif_info.R
-
-```
-sh ctcf_sites_ucsc_guides.sh 
-mkdir guides
-cp *.txt guides
-cd guides
-
-# add the filename to each file for future use
-perl -p -i -e 's/$/ $ARGV/;' *
-cat *.txt > ctcf_all_targets_ucsc_guides.txt
+# note this snakemake file requires one R scripts 1) filter_control_guides.R 
 ```
 
-This will create files for each region with the predicted UCSC guides and the filename for parsing.
-
-
-## Determining CTCF motifs in the human genome and identifying overlaps with CTCF sites of interest
-
-Steps for determining CTCF motifs in the human genome:
-  - Create a motif file from UCSC galaxy human CTCF pssm file
-  - Run scanMotifGenomeWide on hg19 with the custom motif file
-  - Intersect genomic regions of original CTCF sites of interest with CTCF motif genomic regions
-
- ```bash
-# set path so you can run Homer tools
-PATH=$PATH:/home/t.severson/tools/homer/.//bin/
-# Run Homer scanMotifGenomeWide to obtain CTCF motif regions
-scanMotifGenomeWide.pl /home/t.severson/tools/homer/motifs/consensus_CTCF_galaxy.motif hg19 -bed > galaxy_ctcf_hg19.bed
-
-# intersect with original CTCF binding sites
-intersectBed -a ctcf_kmeans_co_h3k27ac_up_in_mets_tads_coverage_only.bed -b galaxy_ctcf_hg19.bed -wa -wb > ctcf_kmeans_co_h3k27ac_up_in_mets_tads_coverage_only_ctcf_galaxy_motifs.txt
-```
-
-## Combining the CTCF motif information with the guides designed in CTCF sites of interest
-
-Steps for final guide selection:
-  - Use a custom R script to make ouptut of UCSC file useful.
-  - Filter guides based on uniqueness in the genome and (mit_specificity_score > 70 & doench2016_percentile_only > 65 ) with custom R script
-  - Get coverage of motif regions with filtered guides
-  - When possible, select the top 4 guides based on coverage of the CTCF motif (highest)
-
-
-```bash
-# get coverage of the regions of all CTCF motifs identified with the regions of the filtered CTCF guides
-coverageBed -a ctcf_kmeans_co_h3k27ac_up_in_mets_tads_coverage_only_ctcf_galaxy_motifs_all.bed -b guides/ctcf_ucsc_guides_filtered.bed > ctcf_kmeans_co_h3k27ac_up_in_mets_tads_coverage_only_ctcf_galaxy_motifs_all_guides_coverageBed.txt
-
-```
