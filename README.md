@@ -56,8 +56,7 @@ snakemake -s design_target_guides_homer_motif_only4_filtered.py
 # 3) filter_target_guides_with_motif_info.R.
 ```
 
-## Obtain UCSC guides in control regions for targets and filter for uniqueness, specificity and effeciency. 
-# Also determine regions that do not yet have target or control guides and design new shell scripts (for new controls, the region is moved 250bp upstream from original)
+## Obtain UCSC guides in control regions for targets and filter for uniqueness, specificity and effeciency. Also determine regions that do not yet have target or control guides and design new shell scripts (for new controls, the region is moved 250bp upstream from original)
 After initial filtering, this script will identify the top 1 control guides per target region based on Doench2016 percentile. Provide relevant details for crispr.bb and bigBedToBed.
 
 ```bash
