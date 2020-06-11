@@ -17,7 +17,7 @@ Steps for designing control guides:
 
   
  ## Use of UCSC All predicted Super track ##
- # Please note, UCSC took down the Crispr Track from their genome browser tables website. 
+ ### Please note, UCSC took down the Crispr Track from their genome browser tables website. 
 Information can be found here:
 https://genome-euro.ucsc.edu/cgi-bin/hgTables
 
