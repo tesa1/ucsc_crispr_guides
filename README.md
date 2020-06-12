@@ -17,7 +17,7 @@ Steps for designing control guides:
 
   
  ## Use of UCSC All predicted Super track ##
- ### Please note, UCSC took down the Crispr Track from their genome browser tables website. 
+ ### Please note, UCSC took down the CRISPR Track from their genome browser tables website. 
 Information can be found here:
 https://genome-euro.ucsc.edu/cgi-bin/hgTables
 
@@ -30,7 +30,7 @@ Downloaded data can be extracted with the kent command line tools (bigBedToBed),
 
 ## Note all commmands expect specific locations of files and path locations. 
 
-These files are dependent on a working directory path. For your own use, you will have to change lines in the python scripts like this:  "WDIR="/home/t.severson/zwart/crispr_guides/ctcf_ucsc_guides/pipeline/" and in the Rscripts like this: 
+The scripts were tested on harris. These files are dependent on a working directory path. For your own use, you will have to change lines in the python scripts like this:  "WDIR="/home/t.severson/zwart/crispr_guides/ctcf_ucsc_guides/pipeline/" and in the Rscripts like this: 
 "setwd("/home/t.severson/zwart/crispr_guides/ctcf_ucsc_guides/pipeline/")"
 to your own path.
 
